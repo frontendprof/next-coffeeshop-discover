@@ -4,9 +4,17 @@ import Card from '../components/card';
 import s from '../styles/Home.module.css';
 import Image from 'next/image';
 
-import coffeeStores from '../data/coffee-stores.json';
+import coffeeStoresData from '../data/coffee-stores.json';
 
-export default function Home() {
+export async function getStaticProps(context) {
+  return {
+    props: {
+      coffeeStores: coffeeStoresData,
+    },
+  };
+}
+
+export default function Home({ coffeeStores }) {
   const handleOnBannerClick = () => {
     console.log('Hello');
   };
@@ -23,11 +31,24 @@ export default function Home() {
         <div className={s.heroImage}>
           <Image src="/static/hero-image.png" width={700} height={400} />
         </div>
-        <div className={s.cardLayout}>
-          {coffeeStores.map((cs) => {
-            return <Card name={cs.name} imgUrl={cs.imgUrl} href={`/coffee-store/${cs.id}`} />;
-          })}
-        </div>
+
+        {coffeeStores.length && (
+          <>
+            <h2 className={s.heading2}>Toronto stores</h2>
+            <div className={s.cardLayout}>
+              {coffeeStores.map((cs) => {
+                return (
+                  <Card
+                    key={cs.id}
+                    name={cs.name}
+                    imgUrl={cs.imgUrl}
+                    href={`/coffee-store/${cs.id}`}
+                  />
+                );
+              })}
+            </div>
+          </>
+        )}
       </main>
     </div>
   );

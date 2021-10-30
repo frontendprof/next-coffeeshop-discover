@@ -10,3 +10,4 @@ MSAW
 - Image Optimization implementation
 - Configuring fonts preloading with \_document
 - Card component layout/styling && grid layout addition
+- Setting up dynamic route of /coffee-store/[id]
