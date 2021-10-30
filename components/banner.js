@@ -4,8 +4,9 @@ const Banner = (props) => {
   return (
     <div className={s.container}>
       <h1 className={s.title}>
-        <span className={s.title1}>QahwaXona</span>
-        <span className={s.title2}>Mushtarikligi</span>
+        <span className={s.title1}>Qahwa</span>
+        <span className={s.title2}>Xona</span>
+        {/* <span className={s.title2}>Mushtarikligi</span> */}
         {/* <span className={s.title1}> قهوه خانه</span>
         <span className={s.title2}>مشترک </span> */}
       </h1>
