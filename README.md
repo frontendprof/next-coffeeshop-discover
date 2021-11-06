@@ -11,3 +11,5 @@ MSAW
 - Configuring fonts preloading with \_document
 - Card component layout/styling && grid layout addition
 - Setting up dynamic route of /coffee-store/[id]
+- Integration with foursquare api
+- Setting up environment variables

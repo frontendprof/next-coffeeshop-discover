@@ -3,13 +3,13 @@ import Banner from '../components/banner';
 import Card from '../components/card';
 import s from '../styles/Home.module.css';
 import Image from 'next/image';
+import { fetchCoffeeStores } from '../lib/coffee-stores';
 
-import coffeeStoresData from '../data/coffee-stores.json';
-
-export async function getStaticProps(context) {
+export async function getStaticProps() {
+  const coffeeStores = await fetchCoffeeStores();
   return {
     props: {
-      coffeeStores: coffeeStoresData,
+      coffeeStores,
     },
   };
 }
@@ -29,7 +29,7 @@ export default function Home({ coffeeStores }) {
       <main className={s.main}>
         <Banner buttonText={'View stores nearby'} handleOnClick={handleOnBannerClick} />
         <div className={s.heroImage}>
-          <Image src="/static/hero-image.png" width={700} height={400} />
+          <Image src="/static/hero-image.png" width={700} height={400} alt="store_images" />
         </div>
 
         {coffeeStores.length && (
@@ -41,7 +41,10 @@ export default function Home({ coffeeStores }) {
                   <Card
                     key={cs.id}
                     name={cs.name}
-                    imgUrl={cs.imgUrl}
+                    imgUrl={
+                      cs.imgUrl ||
+                      'https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80'
+                    }
                     href={`/coffee-store/${cs.id}`}
                   />
                 );
