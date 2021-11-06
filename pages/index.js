@@ -34,7 +34,7 @@ export default function Home({ coffeeStores }) {
 
         {coffeeStores.length && (
           <>
-            <h2 className={s.heading2}>Toronto stores</h2>
+            <h2 className={s.heading2}>Brookly Bay Ridge area stores</h2>
             <div className={s.cardLayout}>
               {coffeeStores.map((cs) => {
                 return (

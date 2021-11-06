@@ -13,3 +13,4 @@ MSAW
 - Setting up dynamic route of /coffee-store/[id]
 - Integration with foursquare api
 - Setting up environment variables
+- Setting up Unsplash API and retrieving appropriate images for the card.
