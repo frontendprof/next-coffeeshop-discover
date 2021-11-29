@@ -29,12 +29,15 @@
 .card {
   justify-content: center;
 }
+.sectionWrapper {
+  margin-top: 5rem;
+}
 
 .heading2 {
   font-size: 2.25rem;
   line-height: 2.5rem;
   padding-bottom: 2rem;
-  margin-top: 5rem;
+
   color: var(--text-white-100);
 }
 

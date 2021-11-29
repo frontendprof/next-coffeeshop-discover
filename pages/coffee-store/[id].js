@@ -44,7 +44,8 @@ const CoffeeStore = ({ coffeeStore }) => {
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-  const { location, name, neighbourhood, imgUrl } = coffeeStore;
+  console.log(coffeeStore);
+  const { location, name, neighborhood, imgUrl } = coffeeStore;
 
   // const id = router.query.id;
 
@@ -86,7 +87,7 @@ const CoffeeStore = ({ coffeeStore }) => {
             <Image src="/static/icons/places.svg" width="24" height="24" alt="places icon" />
             <p className={s.text}>{location.address}</p>
           </div>
-          {neighbourhood && (
+          {neighborhood && (
             <div className={s.iconWrapper}>
               <Image src="/static/icons/nearMe.svg" width="24" height="24" alt="near me icon" />
               <p className={s.text}>{location.neighborhood}</p>
