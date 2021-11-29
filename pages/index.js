@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Head from 'next/head';
 import Banner from '../components/banner';
 import Card from '../components/card';
@@ -6,6 +6,7 @@ import s from '../styles/Home.module.css';
 import Image from 'next/image';
 import { fetchCoffeeStores } from '../lib/coffee-stores';
 import useTrackLocation from '../hooks/use-track-location';
+import { ACTION_TYPES, StoreContext } from '../store/store-context';
 
 export async function getStaticProps() {
   const coffeeStores = await fetchCoffeeStores();
@@ -15,16 +16,25 @@ export async function getStaticProps() {
     },
   };
 }
-export default function Home({ coffeeStores }) {
-  const { handleTrackLocation, latLong, errMsg, isFindingLocation } = useTrackLocation();
-  const [coffeeSts, setCoffeeSts] = useState('');
+export default function Home(props) {
+  const { handleTrackLocation, errMsg, isFindingLocation } = useTrackLocation();
+  // const [coffeeSts, setCoffeeSts] = useState('');
   const [coffeeStoreError, setCoffeeStoreError] = useState();
+  const { dispatch, state } = useContext(StoreContext);
+  const { coffeeStores, latLong } = state;
+
   useEffect(() => {
     const fetchCofStores = async () => {
       if (latLong) {
         try {
           const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 30);
-          setCoffeeSts(fetchedCoffeeStores);
+          // setCoffeeSts(fetchedCoffeeStores);
+          dispatch({
+            type: ACTION_TYPES,
+            payload: {
+              coffeeStores: fetchedCoffeeStores,
+            },
+          });
         } catch (error) {
           console.log({ error });
           setCoffeeStoreError(error.message);
@@ -55,7 +65,7 @@ export default function Home({ coffeeStores }) {
         <div className={s.heroImage}>
           <Image src="/static/hero-image.png" width={700} height={400} alt="store_images" />
         </div>
-        {coffeeSts.length ? (
+        {coffeeStores.length ? (
           <div className={s.sectionWrapper}>
             <h2 className={s.heading2}>Stores near me</h2>
             <div className={s.cardLayout}>
